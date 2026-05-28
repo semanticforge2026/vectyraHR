@@ -63,7 +63,7 @@ logger = logging.getLogger("vectyra")
 
 # ── Config (env-only, no hardcoded secrets) ───────────────────────────────────
 
-HF_TOKEN      = os.getenv("HF_TOKEN", "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")
+HF_TOKEN      = os.getenv("HF_TOKEN", "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")
 SUPABASE_URL  = os.getenv("SUPABASE_URL", "")
 SUPABASE_KEY  = os.getenv("SUPABASE_KEY", "")
 FRONTEND_URL  = os.getenv("FRONTEND_URL", "*")   # set to your real domain in prod
