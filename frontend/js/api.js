@@ -3,7 +3,7 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ── BASE URL ──
-const API_BASE = 'https://vectyra-backend.onrender.com'; // https://vectyrahr.onrender.com
+const API_BASE = 'https://vectyrahr.onrender.com';
 
 // ── ENDPOINTS ──
 const API = {
