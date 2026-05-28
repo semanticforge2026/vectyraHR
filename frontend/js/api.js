@@ -3,7 +3,7 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ── BASE URL ──
-const API_BASE = 'http://localhost:8000';
+const API_BASE = 'https://vectyra-backend.onrender.com'; // https://vectyrahr.onrender.com
 
 // ── ENDPOINTS ──
 const API = {
