@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vectyra — Особистий кабінет | AI Resume Analysis</title>
+  <meta name="description" content="Особистий кабінет Vectyra — аналізуйте резюме з AI, переглядайте аналітику найму та управляйте вакансіями.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'v-green': { dark:'#2D6A4F', DEFAULT:'#3D7A5A', light:'#52B788', pale:'#D8F3DC' },
+            'v-gold': { DEFAULT:'#C9963C', light:'#E9B96E', pale:'#FDF3E3' },
+            'v-brown': { DEFAULT:'#7D5A3C', light:'#A07850' },
+            'v-bg': { DEFAULT:'#FDFCF8', alt:'#F7F4EE' },
+            'v-text': { DEFAULT:'#1C1C1A', medium:'#4A4A42', light:'#8A8A80' },
+            'v-border': '#E8E4DC',
+          },
+          fontFamily: { inter:['Inter','sans-serif'], outfit:['Outfit','sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <!-- Transformers.js client-side WebGPU/WASM AI -->
+  <script src="https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.1/dist/transformers.min.js"></script>
+  <script>
+    if (window.transformers) {
+      window.transformers.env.allowLocalModels = false; // Force loading from HuggingFace CDN
+    }
+  </script>
+</head>
+<body class="dashboard-body">
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay open" id="auth-modal">
+  <div class="modal-wrapper">
+    <div class="modal" id="auth-modal-box">
+      <button class="modal-close" id="modal-close-btn" onclick="closeModal()">✕</button>
+      <div class="modal-logo">⬡ Vectyra</div>
+      <div class="modal-title" id="modal-title">Вітаємо назад!</div>
+      <div class="modal-sub" id="modal-sub">Увійдіть, щоб продовжити роботу</div>
+      <div class="modal-tabs">
+        <button class="modal-tab active" id="tab-login" onclick="switchTab('login')">Увійти</button>
+        <button class="modal-tab" id="tab-register" onclick="switchTab('register')">Реєстрація</button>
+      </div>
+      <form id="login-form" onsubmit="handleLogin(event)" novalidate>
+        <div class="modal-field"><label for="login-email">Email</label><input type="email" id="login-email" placeholder="you@company.com" autocomplete="email"></div>
+        <div class="modal-field"><label for="login-pass">Пароль</label><input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"></div>
+        <button class="modal-submit" id="btn-login-submit" type="submit">Увійти →</button>
+      </form>
+      <form id="register-form" style="display:none;" onsubmit="handleRegister(event)" novalidate>
+        <div class="modal-field"><label for="reg-name">Ім'я та прізвище</label><input type="text" id="reg-name" placeholder="Олена Коваль" autocomplete="name"></div>
+        <div class="modal-field"><label for="reg-email">Email</label><input type="email" id="reg-email" placeholder="you@company.com" autocomplete="email"></div>
+        <div class="modal-field"><label for="reg-company">Компанія</label><input type="text" id="reg-company" placeholder="Назва компанії"></div>
+        <div class="modal-field"><label for="reg-pass">Пароль</label><input type="password" id="reg-pass" placeholder="••••••••" autocomplete="new-password"></div>
+        <button class="modal-submit" id="btn-reg-submit" type="submit">Створити акаунт →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <a href="index.html" class="sidebar-logo"><span class="logo-icon">⬡</span><span>Vectyra</span></a>
+  <nav class="sidebar-nav">
+    <span class="nav-group-label">Головне</span>
+    <button class="sidebar-link active" id="nav-overview" onclick="showTab('overview')">
+      <span class="link-icon">📊</span> Огляд
+    </button>
+    <button class="sidebar-link" id="nav-analysis" onclick="showTab('analysis')">
+      <span class="link-icon">🤖</span> AI Аналіз резюме
+      <span class="ai-badge">AI</span>
+    </button>
+    <span class="nav-group-label">Управління</span>
+    <button class="sidebar-link" id="nav-vacancies" onclick="showTab('vacancies')">
+      <span class="link-icon">💼</span> Вакансії
+      <span class="link-badge">3</span>
+    </button>
+    <button class="sidebar-link" id="nav-candidates" onclick="showTab('candidates')">
+      <span class="link-icon">👥</span> Кандидати
+    </button>
+    <button class="sidebar-link" id="nav-analytics" onclick="showTab('analytics')">
+      <span class="link-icon">📈</span> Аналітика
+    </button>
+    <span class="nav-group-label">Налаштування</span>
+    <button class="sidebar-link" id="nav-settings" onclick="showTab('settings')">
+      <span class="link-icon">⚙️</span> Налаштування
+    </button>
+    <a href="index.html" class="sidebar-link" id="nav-back">
+      <span class="link-icon">←</span> На головну
+    </a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="user-avatar" id="sidebar-avatar">??</div>
+    <div class="user-info">
+      <div class="user-name" id="sidebar-user-name">Гість</div>
+      <div class="user-role" id="sidebar-user-role">Не авторизований</div>
+    </div>
+    <a href="#" class="user-settings" title="Вийти" onclick="handleLogout(); return false;">⚙</a>
+  </div>
+</aside>
+
+<!-- SIDEBAR MOBILE OVERLAY -->
+<div class="sidebar-mobile-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- MAIN -->
+<main class="dashboard-main" id="dashboard-main">
+  <!-- TOPBAR -->
+  <div class="topbar" id="topbar">
+    <div class="flex items-center gap-3">
+      <button class="topbar-btn lg:hidden" id="btn-sidebar-toggle" onclick="toggleSidebar()" title="Меню">☰</button>
+      <div class="topbar-left">
+        <div class="topbar-title" id="topbar-title">Огляд</div>
+        <div class="topbar-subtitle" id="topbar-subtitle">Актуальний стан вашого HR-пайплайну</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="topbar-btn hidden sm:flex" id="btn-notify" title="Сповіщення">🔔</button>
+      <button class="topbar-btn hidden sm:flex" id="btn-help" title="Допомога">❓</button>
+      <button class="topbar-new-btn text-xs sm:text-sm" id="btn-new-vacancy" onclick="showTab('vacancies')">+ Нова вакансія</button>
+    </div>
+  </div>
+
+  <div class="dashboard-content" id="dashboard-content">
+
+    <!-- ═══ OVERVIEW TAB ═══ -->
+    <div class="tab-panel active" id="tab-overview">
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-card-header"><span class="stat-card-icon">💼</span><span class="stat-card-trend" id="stat-vacancies-trend"></span></div><div class="stat-card-value" id="stat-vacancies">—</div><div class="stat-card-label">Активних вакансій</div></div>
+        <div class="stat-card"><div class="stat-card-header"><span class="stat-card-icon">👥</span><span class="stat-card-trend" id="stat-candidates-trend"></span></div><div class="stat-card-value" id="stat-candidates">—</div><div class="stat-card-label">Кандидатів у базі</div></div>
+        <div class="stat-card"><div class="stat-card-header"><span class="stat-card-icon">🤖</span><span class="stat-card-trend" id="stat-match-trend"></span></div><div class="stat-card-value" id="stat-match">—</div><div class="stat-card-label">Середній Match Score</div></div>
+        <div class="stat-card"><div class="stat-card-header"><span class="stat-card-icon">⏱️</span><span class="stat-card-trend" id="stat-days-trend"></span></div><div class="stat-card-value" id="stat-days">—</div><div class="stat-card-label">Днів на закриття</div></div>
+      </div>
+
+      <!-- AI Banner -->
+      <div class="ai-integration-banner" id="ai-banner">
+        <div class="ai-banner-glow"></div>
+        <span class="ai-banner-icon">🧠</span>
+        <div class="ai-banner-content">
+          <div class="ai-banner-title">AI Engine — підключено до бекенду</div>
+          <div class="ai-banner-desc">FastAPI + Transformer NLP на vectyra-mvp-ytfr.onrender.com — семантичний аналіз резюме в реальному часі</div>
+          <div class="ai-models-row">
+            <span class="ai-model-tag">FastAPI Backend</span>
+            <span class="ai-model-tag">Transformer NLP</span>
+            <span class="ai-model-tag">Cosine Similarity</span>
+            <span class="ai-model-tag">Vector Embeddings</span>
+          </div>
+        </div>
+        <span class="ai-banner-badge">Live ✓</span>
+      </div>
+
+      <div class="overview-grid">
+        <div class="card">
+          <div class="card-header">
+            <div><div class="card-title">Активність найму</div><div class="card-subtitle">Кандидати по тижнях</div></div>
+            <div class="card-actions">
+              <button class="card-action-btn active" id="btn-week">Тиж</button>
+              <button class="card-action-btn" id="btn-month">Міс</button>
+            </div>
+          </div>
+          <div style="position:relative;height:200px;"><canvas id="activityChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div><div class="card-title">Воронка найму</div><div class="card-subtitle">Поточний стан</div></div></div>
+          <div style="position:relative;height:200px;"><canvas id="funnelChart"></canvas></div>
+        </div>
+      </div>
+
+      <div class="card" id="recent-candidates-card">
+        <div class="card-header">
+          <div><div class="card-title">Останні кандидати</div><div class="card-subtitle">Відсортовані за Match Score</div></div>
+          <button class="card-action-btn" onclick="showTab('candidates')">Всі кандидати →</button>
+        </div>
+        <div class="table-responsive">
+        <table class="candidates-table" id="candidates-table">
+          <thead><tr><th>Кандидат</th><th>Вакансія</th><th>Match Score</th><th>Статус</th><th>Дата</th></tr></thead>
+          <tbody id="recent-candidates-tbody">
+            <tr><td colspan="5" style="text-align:center;padding:24px;color:#8A8A80;">Увійдіть в акаунт, щоб побачити кандидатів</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ANALYSIS TAB ═══ -->
+    <div class="tab-panel" id="tab-analysis">
+      <div class="ai-integration-banner" style="margin-bottom:24px;">
+        <div class="ai-banner-glow"></div>
+        <span class="ai-banner-icon">🧠</span>
+        <div class="ai-banner-content">
+          <div class="ai-banner-title">AI Semantic Analysis Engine <span id="active-engine-badge" style="font-size:0.75rem;background:#FDF3E3;color:#C9963C;padding:2px 8px;border-radius:6px;margin-left:8px;font-weight:600;vertical-align:middle;border:1px solid #E9B96E;">☁️ Хмарний Llama-3</span></div>
+          <div class="ai-banner-desc">Завантажте резюме та вакансію — ШІ розрахує Cosine Similarity та згенерує аналіз відповідно до обраного двигуна</div>
+          <div class="ai-models-row">
+            <span class="ai-model-tag">Transformer NLP</span>
+            <span class="ai-model-tag">Vector Embeddings</span>
+            <span class="ai-model-tag">Cosine Similarity</span>
+            <span class="ai-model-tag" id="ai-engine-tag">Cloud Llama-3</span>
+          </div>
+        </div>
+        <span class="ai-banner-badge">AI Ready</span>
+      </div>
+
+      <div class="analysis-layout">
+        <div>
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header"><div class="card-title">📄 Завантажити резюме</div></div>
+            <div class="upload-zone" id="upload-zone">
+              <input type="file" class="upload-input" id="resume-file-input" multiple accept=".pdf,.doc,.docx,.txt" onchange="handleFiles(this.files)">
+              <div class="upload-icon">📂</div>
+              <div class="upload-title">Перетягніть файли або натисніть</div>
+              <div class="upload-desc">PDF, DOC, DOCX, TXT · До 10 файлів · Макс 5 МБ кожен</div>
+              <button class="upload-btn" onclick="document.getElementById('resume-file-input').click()">Обрати файли</button>
+            </div>
+            <div class="uploaded-files" id="uploaded-files"></div>
+            <div id="upload-count" style="display:none;"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">📝 Або вставте текст резюме</div></div>
+            <div class="paste-zone">
+              <label for="resume-text">Текст резюме (можна вставити декілька через розділювач "---")</label>
+              <textarea class="paste-textarea" id="resume-text" placeholder="Вставте текст резюме тут...&#10;&#10;---&#10;&#10;Текст другого резюме (якщо потрібно)"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header"><div class="card-title">🎯 Опис вакансії</div></div>
+            <div class="vacancy-input-group">
+              <label style="font-size:.82rem;font-weight:600;color:#4A4A42;">Вставте текст вакансії для аналізу</label>
+              <textarea class="vacancy-textarea" id="vacancy-text" placeholder="Senior React Developer&#10;&#10;Вимоги:&#10;- 3+ роки досвіду з React&#10;- TypeScript, Redux&#10;- Досвід з REST API..."></textarea>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header"><div class="card-title">⚙️ Параметри аналізу</div></div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div class="settings-field">
+                <label>Порогове значення Match Score</label>
+                <input type="range" id="threshold-slider" min="50" max="95" value="75" style="width:100%;" oninput="document.getElementById('threshold-val').textContent=this.value+'%'">
+                <span id="threshold-val" style="font-size:.82rem;color:#3D7A5A;font-weight:700;">75%</span>
+              </div>
+              <div class="toggle-row">
+                <div><div class="toggle-label">AI Саммарізація</div><div class="toggle-desc">Генерувати короткий опис кандидата</div></div>
+                <div class="toggle-switch on" id="toggle-summary" onclick="this.classList.toggle('on')"></div>
+              </div>
+              <div class="toggle-row">
+                <div><div class="toggle-label">Скринінг-питання</div><div class="toggle-desc">Генерувати питання для чат-бота</div></div>
+                <div class="toggle-switch on" id="toggle-screening" onclick="this.classList.toggle('on')"></div>
+              </div>
+            </div>
+          </div>
+
+          <button class="analyse-btn" id="btn-analyse" onclick="runAnalysis()">
+            🤖 Запустити AI Аналіз
+          </button>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="results-panel" id="results-panel">
+        <div class="results-empty" id="results-empty">
+          <div class="results-empty-icon">🔍</div>
+          <div style="font-weight:600;margin-bottom:6px;">Результати з'являться тут</div>
+          <div style="font-size:.84rem;">Завантажте резюме та опис вакансії, потім натисніть «Запустити AI Аналіз»</div>
+        </div>
+        <div id="results-content" style="display:none;">
+          <div class="results-header">
+            <div class="results-title" id="results-title">Результати аналізу</div>
+            <button class="card-action-btn" id="btn-export" onclick="exportResults()">⬇ Експорт CSV</button>
+          </div>
+          <div class="results-list" id="results-list"></div>
+        </div>
+        <div id="results-loading" style="display:none;padding:24px;">
+          <!-- Local Model Progress Loader -->
+          <div id="local-ai-loader" style="display:none;text-align:center;padding:20px;background:#F7F4EE;border:1.5px dashed var(--v-gold-light);border-radius:12px;margin-bottom:20px;">
+            <div style="font-size:2.5rem;margin-bottom:10px;">💻</div>
+            <div style="font-weight:600;color:var(--v-text);font-size:0.95rem;margin-bottom:6px;" id="local-ai-status">Ініціалізація локальної нейромережі...</div>
+            <div style="font-size:0.8rem;color:#8A8A80;margin-bottom:12px;" id="local-ai-file-status">Завантаження файлів Qwen-1.5 (~350 MB)</div>
+            <div style="width:100%;height:8px;background:#E8E4DC;border-radius:4px;overflow:hidden;">
+              <div id="local-ai-progress-bar" style="width:0%;height:100%;background:linear-gradient(135deg, #C9963C, #3D7A5A);transition:width 0.2s ease;"></div>
+            </div>
+            <div style="font-size:0.82rem;font-weight:700;color:#3D7A5A;margin-top:8px;" id="local-ai-percent">0%</div>
+          </div>
+          <div class="skeleton-block tall"></div>
+          <div class="skeleton-block"></div>
+          <div class="skeleton-block short"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ VACANCIES TAB ═══ -->
+    <div class="tab-panel" id="tab-vacancies">
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">💼 Активні вакансії</div><div class="card-subtitle">Управляйте своїми відкритими позиціями</div></div>
+          <button class="topbar-new-btn" id="btn-add-vacancy" onclick="openCreateVacancyModal()">+ Додати вакансію</button>
+        </div>
+        <!-- Loading state -->
+        <div id="vacancies-loading" class="table-loading-state">
+          <div class="tls-spinner"></div>
+          <span>Завантажуємо вакансії…</span>
+        </div>
+        <!-- Empty state -->
+        <div id="vacancies-empty" style="display:none;" class="table-empty-state">
+          <div class="tes-icon">💼</div>
+          <div class="tes-title">Вакансій ще немає</div>
+          <div class="tes-desc">Створіть першу вакансію щоб почати наймати</div>
+        </div>
+        <!-- Error state -->
+        <div id="vacancies-error" style="display:none;" class="table-error-state">
+          <span class="ter-icon">⚠️</span>
+          <span id="vacancies-error-msg">Помилка завантаження</span>
+          <button class="ter-retry" onclick="loadVacancies()">🔄 Повторити</button>
+        </div>
+        <!-- Table -->
+        <div class="table-responsive" id="vacancies-table-wrap" style="display:none;">
+        <table class="candidates-table">
+          <thead><tr><th>Назва</th><th>Кандидатів</th><th>Серед. Match</th><th>Статус</th><th>Відкрита з</th><th>Дії</th></tr></thead>
+          <tbody id="vacancies-tbody"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CANDIDATES TAB ═══ -->
+    <div class="tab-panel" id="tab-candidates">
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">👥 База кандидатів</div><div class="card-subtitle">Всі кандидати з Match Score</div></div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="text" id="candidates-search" placeholder="Пошук…" style="padding:6px 12px;border:1px solid var(--border);border-radius:8px;font-size:.82rem;outline:none;" oninput="filterCandidates(this.value)">
+            <button class="card-action-btn" onclick="showTab('analysis')">🤖 Новий аналіз</button>
+          </div>
+        </div>
+        <!-- Loading state -->
+        <div id="candidates-loading" class="table-loading-state">
+          <div class="tls-spinner"></div>
+          <span>Завантажуємо кандидатів…</span>
+        </div>
+        <!-- Empty state -->
+        <div id="candidates-empty" style="display:none;" class="table-empty-state">
+          <div class="tes-icon">👥</div>
+          <div class="tes-title">Кандидатів ще немає</div>
+          <div class="tes-desc">Запустіть AI-аналіз резюме щоб додати перших кандидатів</div>
+          <button class="ter-retry" style="margin-top:12px;" onclick="showTab('analysis')">🤖 Запустити аналіз</button>
+        </div>
+        <!-- Error state -->
+        <div id="candidates-error" style="display:none;" class="table-error-state">
+          <span class="ter-icon">⚠️</span>
+          <span id="candidates-error-msg">Помилка завантаження</span>
+          <button class="ter-retry" onclick="loadCandidates()">🔄 Повторити</button>
+        </div>
+        <!-- Table -->
+        <div class="table-responsive" id="candidates-table-wrap" style="display:none;">
+        <table class="candidates-table">
+          <thead><tr><th>Кандидат</th><th>Вакансія</th><th>Match Score</th><th>Статус</th><th>AI Саммарі</th></tr></thead>
+          <tbody id="candidates-tbody"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ANALYTICS TAB ═══ -->
+    <div class="tab-panel" id="tab-analytics">
+      <div class="analytics-grid">
+        <div class="card analytics-wide">
+          <div class="card-header"><div class="card-title">📈 Динаміка найму за місяць</div></div>
+          <div style="position:relative;height:200px;"><canvas id="analyticsLine"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">🎯 Match Score розподіл</div></div>
+          <div style="position:relative;height:220px;"><canvas id="scoreDistChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">💼 Вакансії по статусах</div></div>
+          <div style="position:relative;height:220px;"><canvas id="vacancyStatusChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SETTINGS TAB ═══ -->
+    <div class="tab-panel" id="tab-settings">
+      <div class="settings-grid">
+        <div class="settings-card">
+          <h3>👤 Профіль</h3><p>Ваші особисті дані</p>
+          <div class="settings-field"><label>Ім'я</label><input type="text" id="settings-name" value=""></div>
+          <div class="settings-field"><label>Email</label><input type="email" id="settings-email" value="" readonly></div>
+          <div class="settings-field"><label>Компанія</label><input type="text" id="settings-company" value=""></div>
+          <div class="settings-field"><label>Посада</label><input type="text" id="settings-role" value=""></div>
+          <button class="settings-save-btn" id="btn-save-profile" onclick="saveProfile()">Зберегти</button>
+        </div>
+        <div class="settings-card">
+          <h3>🤖 AI Аналітичний Двигун</h3><p>Оберіть режим обробки даних резюме</p>
+          <div class="settings-field">
+            <label>Активний AI Engine</label>
+            <select id="settings-ai-engine" onchange="changeAiEngine(this.value)" style="width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:.88rem;font-family:Inter,sans-serif;outline:none;background:white;">
+              <option value="cloud">☁️ Хмарний сервер (Llama-3)</option>
+              <option value="local">💻 Локальний браузер (WebGPU / WASM Qwen)</option>
+            </select>
+          </div>
+          <p class="settings-desc" style="font-size:0.78rem;color:#8A8A80;margin-top:6px;line-height:1.3;">
+            * <strong>Хмарний</strong>: швидкий старт, без навантаження на систему.<br>
+            * <strong>Локальний</strong>: повна приватність, завантажує компактну модель Qwen (~350MB) у кеш вашого браузера для офлайн-аналізу.
+          </p>
+          <button class="settings-save-btn" style="margin-top:10px;" id="btn-save-ai-engine" onclick="saveAiEngineSettings()">Зберегти налаштування AI</button>
+        </div>
+        <div class="settings-card">
+          <h3>🔔 Сповіщення</h3><p>Налаштуйте алерти</p>
+          <div class="toggle-row"><div><div class="toggle-label">Email при новому кандидаті</div></div><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="toggle-row"><div><div class="toggle-label">Match Score вище порогу</div></div><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="toggle-row"><div><div class="toggle-label">Тижневий звіт</div></div><div class="toggle-switch" onclick="this.classList.toggle('on')"></div></div>
+          <div class="toggle-row"><div><div class="toggle-label">Скринінг завершено</div></div><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></div>
+        </div>
+        <div class="settings-card">
+          <h3>🔒 Безпека</h3><p>Захист вашого акаунту</p>
+          <div class="settings-field"><label>Поточний пароль</label><input type="password" id="settings-pass-current" placeholder="••••••••" autocomplete="current-password"></div>
+          <div class="settings-field"><label>Новий пароль</label><input type="password" id="settings-pass-new" placeholder="••••••••" autocomplete="new-password"></div>
+          <div class="settings-field"><label>Підтвердження</label><input type="password" id="settings-pass-confirm" placeholder="••••••••" autocomplete="new-password"></div>
+          <div class="toggle-row"><div><div class="toggle-label">Двофакторна автентифікація</div><div class="toggle-desc">Рекомендовано для безпеки</div></div><div class="toggle-switch" id="toggle-2fa" onclick="this.classList.toggle('on')"></div></div>
+          <button class="settings-save-btn" id="btn-change-password" style="margin-top:12px;" onclick="changePassword()">Змінити пароль</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dashboard-content -->
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

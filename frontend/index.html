@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vectyra — AI Semantic Recruitment Platform | Розумний найм з ШІ</title>
+  <meta name="description" content="Vectyra — платформа семантичного найму на базі ШІ. Знаходьте ідеальних кандидатів у 5× швидше завдяки векторному AI-метчингу та автоматичному скринінгу.">
+  <meta name="keywords" content="AI recruitment, semantic matching, HR технології, рекрутинг ШІ, автоматизація найму, Vectyra">
+  <meta name="author" content="Vectyra Team">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Vectyra — AI Semantic Recruitment Platform">
+  <meta property="og:description" content="Знаходьте ідеальних кандидатів у 5× швидше з AI-метчингом">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vectyra.ai">
+  <meta property="og:image" content="https://vectyra.ai/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vectyra — AI Recruitment Platform">
+  <meta name="twitter:description" content="Семантичний AI-метчинг для сучасного HR">
+  <link rel="canonical" href="https://vectyra.ai">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'v-green': { dark:'#2D6A4F', DEFAULT:'#3D7A5A', light:'#52B788', pale:'#D8F3DC' },
+            'v-gold': { DEFAULT:'#C9963C', light:'#E9B96E', pale:'#FDF3E3' },
+            'v-brown': { DEFAULT:'#7D5A3C', light:'#A07850' },
+            'v-bg': { DEFAULT:'#FDFCF8', alt:'#F7F4EE' },
+            'v-text': { DEFAULT:'#1C1C1A', medium:'#4A4A42', light:'#8A8A80' },
+            'v-border': '#E8E4DC',
+          },
+          fontFamily: { inter:['Inter','sans-serif'], outfit:['Outfit','sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Vectyra","applicationCategory":"BusinessApplication","description":"AI Semantic Recruitment Platform","offers":{"@type":"Offer","availability":"https://schema.org/ComingSoon"}}</script>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo" id="nav-logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">Vectyra</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#features" id="nav-features">Можливості</a></li>
+      <li><a href="#how-it-works" id="nav-how">Як це працює</a></li>
+      <li><a href="#impact" id="nav-impact">Результати</a></li>
+      <li><a href="#pricing" id="nav-pricing">Ціни</a></li>
+      <li><a href="#contact" id="nav-contact">Контакт</a></li>
+    </ul>
+    <div class="nav-actions" id="nav-actions">
+      <a href="dashboard.html" class="btn-ghost" id="btn-login">Увійти</a>
+      <a href="dashboard.html" class="btn-primary" id="btn-register">Почати безкоштовно</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#features">Можливості</a>
+  <a href="#how-it-works">Як це працює</a>
+  <a href="#impact">Результати</a>
+  <a href="#pricing">Ціни</a>
+  <a href="#contact">Контакт</a>
+  <div class="mobile-nav-divider"></div>
+  <a href="dashboard.html" class="mobile-nav-cta">Почати безкоштовно →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+  <div class="hero-orb orb-3"></div>
+  <div class="hero-content">
+    <div class="hero-badge anim-badge" id="hero-badge">
+      <span class="badge-dot dot-pulse"></span>
+      <span>AI-powered · Semantic Matching · Auto-Screening</span>
+    </div>
+    <h1 class="hero-title anim-title" id="hero-title">
+      Знаходьте ідеальних кандидатів<br>
+      <span class="highlight-gold">у 5× швидше</span> з ШІ
+    </h1>
+    <p class="hero-subtitle anim-sub" id="hero-subtitle">
+      Vectyra замінює застарілий пошук за ключовими словами на семантичний AI-аналіз. Система розуміє контекст, синоніми та суміжні навички — і знаходить ідеальний збіг автоматично.
+    </p>
+    <div class="hero-actions anim-actions" id="hero-actions">
+      <a href="dashboard.html" class="btn-hero-primary btn-shine" id="cta-start">Спробувати безкоштовно →</a>
+      <a href="#how-it-works" class="btn-hero-ghost" id="cta-demo">Як це працює</a>
+    </div>
+    <div class="hero-stats anim-stats" id="hero-stats">
+      <div class="stat-item"><span class="stat-value">89%</span><span class="stat-label">Точність метчингу</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-value">5×</span><span class="stat-label">Швидше закриття</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-value">80%</span><span class="stat-label">Економія часу HR</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-value">3.2×</span><span class="stat-label">ROI для бізнесу</span></div>
+    </div>
+    <!-- Trust Bar -->
+    <div class="anim-trust mt-8 md:mt-10 flex flex-col items-center gap-3">
+      <p class="text-xs md:text-sm text-v-text-light font-medium tracking-wide uppercase">Довіряють 150+ HR-команд в Україні та Європі</p>
+      <div class="flex flex-wrap justify-center gap-4 md:gap-8 opacity-40">
+        <span class="text-sm md:text-base font-bold text-v-text-medium">TechCorp</span>
+        <span class="text-sm md:text-base font-bold text-v-text-medium">DataHouse</span>
+        <span class="text-sm md:text-base font-bold text-v-text-medium">SoftServe</span>
+        <span class="text-sm md:text-base font-bold text-v-text-medium">GlobalLogic</span>
+        <span class="hidden sm:inline text-sm md:text-base font-bold text-v-text-medium">Intellias</span>
+        <span class="hidden md:inline text-sm md:text-base font-bold text-v-text-medium">EPAM</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint"><span>Прокрутіть вниз</span><div class="scroll-arrow arrow-bounce"></div></div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-section" id="problem">
+  <div class="container">
+    <div class="section-label" data-reveal>Проблема</div>
+    <h2 class="section-title" data-reveal data-delay="100">Сучасний найм <span class="highlight-brown">зламаний</span></h2>
+    <p class="section-subtitle" data-reveal data-delay="200">Класичні платформи використовують застарілий підхід, який коштує бізнесу тисячі доларів щомісяця</p>
+    <div class="comparison-grid">
+      <div class="comparison-card card-bad card-reveal" id="card-old-way">
+        <div class="card-header-bad"><span class="card-icon">⚠️</span><h3>Старий підхід</h3></div>
+        <ul class="comparison-list">
+          <li><span class="x-mark">✗</span> Пошук лише за точними словами</li>
+          <li><span class="x-mark">✗</span> "Java" ≠ "J2EE" — система не розуміє</li>
+          <li><span class="x-mark">✗</span> 45 хвилин на читання одного резюме</li>
+          <li><span class="x-mark">✗</span> Суб'єктивна оцінка рекрутера</li>
+          <li><span class="x-mark">✗</span> 20 хвилин на скринінг-дзвінок</li>
+          <li><span class="x-mark">✗</span> До 14 днів на закриття вакансії</li>
+          <li><span class="x-mark">✗</span> Втрата топ-кандидатів через затримки</li>
+          <li><span class="x-mark">✗</span> Відсутність аналітики ефективності</li>
+        </ul>
+        <div class="card-stat-bad"><span class="stat-big">$4,200</span><span class="stat-desc">середня вартість одного найму</span></div>
+      </div>
+      <div class="comparison-vs"><div class="vs-circle">vs</div><div class="vs-arrow">→</div></div>
+      <div class="comparison-card card-good card-reveal" id="card-new-way">
+        <div class="card-header-good"><span class="card-icon">✨</span><h3>Vectyra спосіб</h3></div>
+        <ul class="comparison-list">
+          <li><span class="check-mark">✓</span> Семантичний аналіз контексту</li>
+          <li><span class="check-mark">✓</span> AI розуміє синоніми та суміжні навички</li>
+          <li><span class="check-mark">✓</span> 3 речення AI-саммарі замість 3 сторінок</li>
+          <li><span class="check-mark">✓</span> Об'єктивний Matching Score 0–100%</li>
+          <li><span class="check-mark">✓</span> Автоматичний скринінг через бота</li>
+          <li><span class="check-mark">✓</span> 2–3 дні на закриття вакансії</li>
+          <li><span class="check-mark">✓</span> Миттєве сповіщення про ідеальних кандидатів</li>
+          <li><span class="check-mark">✓</span> Повна аналітика та KPI дашборд</li>
+        </ul>
+        <div class="card-stat-good"><span class="stat-big">$1,100</span><span class="stat-desc">середня вартість найму з Vectyra</span></div>
+      </div>
+    </div>
+    <!-- Summary savings -->
+    <div class="mt-8 md:mt-10 p-5 md:p-6 rounded-2xl bg-white border border-v-border text-center" data-reveal data-delay="300">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10">
+        <div><span class="font-outfit text-2xl md:text-3xl font-extrabold gradient-text-green">$3,100</span><span class="block text-xs text-v-text-light mt-1">економія на кожному наймі</span></div>
+        <div class="hidden sm:block w-px h-12 bg-v-border"></div>
+        <div><span class="font-outfit text-2xl md:text-3xl font-extrabold gradient-text-gold">74%</span><span class="block text-xs text-v-text-light mt-1">зниження витрат</span></div>
+        <div class="hidden sm:block w-px h-12 bg-v-border"></div>
+        <div><span class="font-outfit text-2xl md:text-3xl font-extrabold gradient-text-green">5×</span><span class="block text-xs text-v-text-light mt-1">швидший результат</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="container">
+    <div class="section-label" data-reveal>Можливості</div>
+    <h2 class="section-title" data-reveal data-delay="100">Три кити <span class="highlight-green">Vectyra</span></h2>
+    <p class="section-subtitle" data-reveal data-delay="200">Комплексна платформа, що автоматизує весь цикл первинного відбору кандидатів</p>
+    <div class="features-grid">
+      <div class="feature-card card-reveal glow-hover" id="feature-matching">
+        <div class="feature-icon-wrap green">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <h3>Semantic Matching</h3>
+        <p>Резюме та вакансія перетворюються на вектори у 1536-вимірному просторі. Косинусна подібність визначає точний відсоток збігу між навичками, досвідом та вимогами.</p>
+        <ul class="mt-3 flex flex-col gap-1.5 text-xs text-v-text-medium">
+          <li class="flex gap-2 items-start"><span class="text-v-green-light font-bold">→</span> Розуміє "React" = "React.js" = "ReactJS"</li>
+          <li class="flex gap-2 items-start"><span class="text-v-green-light font-bold">→</span> Враховує суміжні технології</li>
+          <li class="flex gap-2 items-start"><span class="text-v-green-light font-bold">→</span> Мультимовний аналіз (UA/EN)</li>
+        </ul>
+        <div class="feature-tag">Cosine Similarity · Transformer NLP · 1536-dim</div>
+        <div class="feature-score"><div class="score-bar"><div class="score-fill score-fill-anim" style="width:89%"></div></div><span>89% точність</span></div>
+      </div>
+      <div class="feature-card featured card-reveal glow-gold-hover" id="feature-summary">
+        <div class="feature-badge">Топ функція</div>
+        <div class="feature-icon-wrap gold">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>AI Summarization</h3>
+        <p>LLM генерує 3 речення замість читання 3-сторінкового резюме. Рекрутер бачить головне: стек, досвід, зарплатні очікування — миттєво.</p>
+        <ul class="mt-3 flex flex-col gap-1.5 text-xs text-v-text-medium">
+          <li class="flex gap-2 items-start"><span class="text-v-gold font-bold">→</span> Ключові навички та рівень</li>
+          <li class="flex gap-2 items-start"><span class="text-v-gold font-bold">→</span> Зарплатні очікування</li>
+          <li class="flex gap-2 items-start"><span class="text-v-gold font-bold">→</span> Червоні та зелені прапорці</li>
+        </ul>
+        <div class="feature-tag">GPT-4o · Gemini Pro · LLM API</div>
+        <div class="feature-metric"><span class="metric-value">80%</span><span class="metric-label">економія часу HR</span></div>
+      </div>
+      <div class="feature-card card-reveal glow-hover" id="feature-screening">
+        <div class="feature-icon-wrap brown">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Auto-Screening Bot</h3>
+        <p>При збігу більше 75% чат-бот автоматично надсилає 3 персоналізовані питання. Відповіді одразу потрапляють у картку кандидата для швидкого прийняття рішення.</p>
+        <ul class="mt-3 flex flex-col gap-1.5 text-xs text-v-text-medium">
+          <li class="flex gap-2 items-start"><span class="text-v-brown font-bold">→</span> Персоналізовані питання під вакансію</li>
+          <li class="flex gap-2 items-start"><span class="text-v-brown font-bold">→</span> Telegram, Email, Web-чат</li>
+          <li class="flex gap-2 items-start"><span class="text-v-brown font-bold">→</span> Автоматична оцінка відповідей</li>
+        </ul>
+        <div class="feature-tag">Chatbot · AI Questions · Auto-filter</div>
+        <div class="feature-score"><div class="score-bar"><div class="score-fill brown-fill score-fill-anim" style="width:75%"></div></div><span>Поріг активації: 75%</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how-it-works">
+  <div class="container">
+    <div class="section-label" data-reveal>Процес</div>
+    <h2 class="section-title" data-reveal data-delay="100">Як це <span class="highlight-gold">працює</span></h2>
+    <p class="section-subtitle" data-reveal data-delay="200">Від публікації вакансії до фінального кандидата — повністю автоматизовано</p>
+    <div class="steps-container">
+      <div class="step card-reveal" id="step-1">
+        <div class="step-number">01</div>
+        <div class="step-content">
+          <h3>Публікуєте вакансію</h3>
+          <p>Рекрутер описує позицію у вільній формі. AI виділяє вимоги та генерує вектор вакансії.</p>
+          <div class="mt-3 flex flex-wrap gap-1.5 justify-center">
+            <span class="text-[0.65rem] px-2 py-0.5 rounded-full bg-v-green-pale text-v-green-dark font-semibold">NLP Parsing</span>
+            <span class="text-[0.65rem] px-2 py-0.5 rounded-full bg-v-gold-pale text-v-gold font-semibold">~30 сек</span>
+          </div>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step card-reveal" id="step-2">
+        <div class="step-number">02</div>
+        <div class="step-content">
+          <h3>AI аналізує резюме</h3>
+          <p>Система обробляє резюме: токенізація → лематизація → векторизація через Transformer NLP моделі.</p>
+          <div class="mt-3 flex flex-wrap gap-1.5 justify-center">
+            <span class="text-[0.65rem] px-2 py-0.5 rounded-full bg-v-green-pale text-v-green-dark font-semibold">Transformer</span>
+            <span class="text-[0.65rem] px-2 py-0.5 rounded-full bg-v-gold-pale text-v-gold font-semibold">~2 сек/резюме</span>
+          </div>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step card-reveal" id="step-3">
+        <div class="step-number">03</div>
+        <div class="step-content">
+          <h3>Ранжований список</h3>
+          <p>Дашборд показує кандидатів за Matching Score. Кожен — з AI-саммарі у 3 речення та ключовими тегами.</p>
+          <div class="mt-3 flex flex-wrap gap-1.5 justify-center">
+            <span class="text-[0.65rem] px-2 py-0.5 rounded-full bg-v-green-pale text-v-green-dark font-semibold">Ranking</span>
+            <span class="text-[0.65rem] px-2 py-0.5 rounded-full bg-v-gold-pale text-v-gold font-semibold">Миттєво</span>
+          </div>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step card-reveal" id="step-4">
+        <div class="step-number">04</div>
+        <div class="step-content">
+          <h3>Бот проводить скринінг</h3>
+          <p>Топ-кандидати отримують персоналізовані питання через чат-бот. Відповіді — ще до першого дзвінка HR.</p>
+          <div class="mt-3 flex flex-wrap gap-1.5 justify-center">
+            <span class="text-[0.65rem] px-2 py-0.5 rounded-full bg-v-green-pale text-v-green-dark font-semibold">Auto-Screen</span>
+            <span class="text-[0.65rem] px-2 py-0.5 rounded-full bg-v-gold-pale text-v-gold font-semibold">~24 год</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact-section" id="impact">
+  <div class="impact-bg-decor"></div>
+  <div class="container">
+    <div class="section-label" data-reveal>Результати</div>
+    <h2 class="section-title" data-reveal data-delay="100">Дані говорять <span class="highlight-green">самі за себе</span></h2>
+    <p class="section-subtitle" data-reveal data-delay="200">Порівняння реальних HR-показників до і після впровадження Vectyra</p>
+
+    <!-- Enhanced Impact Cards with animated borders -->
+    <div class="impact-top-cards">
+      <div class="impact-top-card impact-card-glow" data-reveal data-delay="100">
+        <div class="itc-decor-ring"></div>
+        <span class="itc-icon">⚡</span>
+        <span class="itc-val" data-count="4.7" data-suffix="×">4.7×</span>
+        <span class="itc-lbl">Швидше закриття вакансій</span>
+        <div class="itc-sparkline" data-sparkline="14,12,9,7,5,3,3,2"></div>
+      </div>
+      <div class="impact-top-card impact-card-glow" data-reveal data-delay="200">
+        <div class="itc-decor-ring"></div>
+        <span class="itc-icon">🎯</span>
+        <span class="itc-val" data-count="53" data-prefix="+">+53%</span>
+        <span class="itc-lbl">Точність відбору</span>
+        <div class="itc-sparkline" data-sparkline="34,42,51,60,72,80,87,89"></div>
+      </div>
+      <div class="impact-top-card impact-card-glow" data-reveal data-delay="300">
+        <div class="itc-decor-ring"></div>
+        <span class="itc-icon">💸</span>
+        <span class="itc-val" data-count="74" data-prefix="-">-74%</span>
+        <span class="itc-lbl">Зниження вартості найму</span>
+        <div class="itc-sparkline" data-sparkline="4200,3800,3100,2400,1800,1400,1200,1100"></div>
+      </div>
+      <div class="impact-top-card impact-card-glow" data-reveal data-delay="400">
+        <div class="itc-decor-ring"></div>
+        <span class="itc-icon">🤖</span>
+        <span class="itc-val" data-count="3.2" data-suffix="×">3.2×</span>
+        <span class="itc-lbl">ROI за перший рік</span>
+        <div class="itc-sparkline" data-sparkline="0.4,0.8,1.2,1.6,2.0,2.5,2.9,3.2"></div>
+      </div>
+    </div>
+
+    <!-- Comparison Bars -->
+    <div class="comparison-bars-grid">
+      <div class="cbar-card cbar-card-enhanced" data-reveal data-delay="100">
+        <div class="cbar-card-accent"></div>
+        <div class="cbar-title">⏱️ Час закриття вакансії</div>
+        <div class="cbar-desc">Середня кількість днів від публікації до оферу</div>
+        <div class="cbar-row"><div class="cbar-labels"><span class="cbar-name">Junior Dev</span><span class="cbar-vals"><span class="cbar-old-val">10 дн</span><span class="cbar-new-val">2 дн</span></span></div><div class="cbar-track"><div class="cbar-old" data-w="100%"><span class="cbar-old-label">без AI</span></div><div class="cbar-new cbar-new-animated" data-w="20%"></div></div></div>
+        <div class="cbar-row"><div class="cbar-labels"><span class="cbar-name">Middle Dev</span><span class="cbar-vals"><span class="cbar-old-val">14 дн</span><span class="cbar-new-val">3 дн</span></span></div><div class="cbar-track"><div class="cbar-old" data-w="100%"><span class="cbar-old-label">без AI</span></div><div class="cbar-new cbar-new-animated" data-w="21%"></div></div></div>
+        <div class="cbar-row"><div class="cbar-labels"><span class="cbar-name">Senior Dev</span><span class="cbar-vals"><span class="cbar-old-val">21 дн</span><span class="cbar-new-val">4 дн</span></span></div><div class="cbar-track"><div class="cbar-old" data-w="100%"><span class="cbar-old-label">без AI</span></div><div class="cbar-new cbar-new-animated" data-w="19%"></div></div></div>
+        <div class="cbar-row"><div class="cbar-labels"><span class="cbar-name">Designer</span><span class="cbar-vals"><span class="cbar-old-val">12 дн</span><span class="cbar-new-val">2 дн</span></span></div><div class="cbar-track"><div class="cbar-old" data-w="100%"><span class="cbar-old-label">без AI</span></div><div class="cbar-new cbar-new-animated" data-w="17%"></div></div></div>
+        <div class="cbar-legend"><div class="cbar-leg-item"><div class="cbar-leg-dot" style="background:rgba(231,76,60,0.4)"></div>Без Vectyra</div><div class="cbar-leg-item"><div class="cbar-leg-dot cbar-leg-dot-pulse" style="background:#52B788"></div>З Vectyra</div></div>
+      </div>
+
+      <div class="cbar-card cbar-card-enhanced" data-reveal data-delay="200">
+        <div class="cbar-card-accent accent-gold"></div>
+        <div class="cbar-title">🎯 Точність відбору кандидатів</div>
+        <div class="cbar-desc">Відсоток релевантних кандидатів серед відібраних</div>
+        <div class="cbar-row"><div class="cbar-labels"><span class="cbar-name">Keyword пошук</span><span class="cbar-vals"><span class="cbar-old-val">34%</span><span class="cbar-new-val">89%</span></span></div><div class="cbar-track"><div class="cbar-old" data-w="38%"><span class="cbar-old-label">34%</span></div><div class="cbar-new cbar-new-animated" data-w="89%"></div></div></div>
+        <div class="cbar-row"><div class="cbar-labels"><span class="cbar-name">HR ручний відбір</span><span class="cbar-vals"><span class="cbar-old-val">51%</span><span class="cbar-new-val">91%</span></span></div><div class="cbar-track"><div class="cbar-old" data-w="56%"><span class="cbar-old-label">51%</span></div><div class="cbar-new cbar-new-animated" data-w="91%"></div></div></div>
+        <div class="cbar-row"><div class="cbar-labels"><span class="cbar-name">AI Semantic Match</span><span class="cbar-vals"><span class="cbar-old-val">—</span><span class="cbar-new-val">94%</span></span></div><div class="cbar-track"><div class="cbar-old" data-w="0%"></div><div class="cbar-new cbar-new-animated" data-w="94%"></div></div></div>
+        <div class="cbar-row"><div class="cbar-labels"><span class="cbar-name">Час HR/кандидат</span><span class="cbar-vals"><span class="cbar-old-val">45хв</span><span class="cbar-new-val">8хв</span></span></div><div class="cbar-track"><div class="cbar-old" data-w="100%"><span class="cbar-old-label">45хв</span></div><div class="cbar-new cbar-new-animated" data-w="18%"></div></div></div>
+        <div class="cbar-legend"><div class="cbar-leg-item"><div class="cbar-leg-dot" style="background:rgba(231,76,60,0.4)"></div>Без Vectyra</div><div class="cbar-leg-item"><div class="cbar-leg-dot cbar-leg-dot-pulse" style="background:#52B788"></div>З Vectyra</div></div>
+      </div>
+    </div>
+
+    <!-- Charts Grid: 3 new charts -->
+    <div class="charts-showcase-grid">
+      <!-- Donut: HR Time Distribution -->
+      <div class="chart-card-v2 chart-card-glass" data-reveal data-delay="100">
+        <div class="chart-card-header">
+          <div class="chart-card-icon">🕐</div>
+          <div>
+            <h3 class="chart-title-v2">Розподіл часу HR</h3>
+            <p class="chart-desc-v2">Куди йде час рекрутера з Vectyra</p>
+          </div>
+        </div>
+        <div class="chart-container-v2 chart-donut-wrap">
+          <canvas id="timeDonutChart"></canvas>
+          <div class="donut-center-label">
+            <span class="donut-center-val">82%</span>
+            <span class="donut-center-text">автоматизовано</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Radar: Matching Quality -->
+      <div class="chart-card-v2 chart-card-glass" data-reveal data-delay="200">
+        <div class="chart-card-header">
+          <div class="chart-card-icon">📊</div>
+          <div>
+            <h3 class="chart-title-v2">Якість відбору</h3>
+            <p class="chart-desc-v2">Порівняння метрик старого та AI-підходу</p>
+          </div>
+        </div>
+        <div class="chart-container-v2">
+          <canvas id="qualityRadarChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Line/Area: ROI Over Time -->
+      <div class="chart-card-v2 chart-card-glass chart-card-wide" data-reveal data-delay="300">
+        <div class="chart-card-header">
+          <div class="chart-card-icon">📈</div>
+          <div>
+            <h3 class="chart-title-v2">ROI по місяцях</h3>
+            <p class="chart-desc-v2">Повернення інвестицій з моменту впровадження Vectyra</p>
+          </div>
+        </div>
+        <div class="chart-container-v2 chart-line-wrap">
+          <canvas id="roiLineChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enhanced Cost Chart -->
+    <div class="chart-card-v2 chart-card-glass chart-card-full-v2" data-reveal>
+      <div class="chart-card-header">
+        <div class="chart-card-icon">💰</div>
+        <div>
+          <h3 class="chart-title-v2">Вартість найму по спеціальностях ($)</h3>
+          <p class="chart-desc-v2">Повна вартість процесу найму — до та після Vectyra</p>
+        </div>
+      </div>
+      <div class="chart-container-v2 chart-bar-wrap">
+        <canvas id="costChart"></canvas>
+      </div>
+      <div class="chart-savings-strip">
+        <div class="savings-item"><span class="savings-val savings-anim" data-count="73" data-suffix="%">73%</span><span class="savings-lbl">середня економія</span></div>
+        <div class="savings-divider"></div>
+        <div class="savings-item"><span class="savings-val savings-anim" data-count="3100" data-prefix="$">$3,100</span><span class="savings-lbl">економія на наймі</span></div>
+        <div class="savings-divider"></div>
+        <div class="savings-item"><span class="savings-val savings-anim" data-count="37200" data-prefix="$">$37,200</span><span class="savings-lbl">на рік (12 наймів)</span></div>
+      </div>
+    </div>
+
+    <!-- Animated Stats Ticker -->
+    <div class="impact-ticker" data-reveal data-delay="200">
+      <div class="ticker-track">
+        <div class="ticker-item"><span class="ticker-dot ticker-dot-green"></span>150+ активних HR-команд</div>
+        <div class="ticker-item"><span class="ticker-dot ticker-dot-gold"></span>12,000+ оброблених резюме</div>
+        <div class="ticker-item"><span class="ticker-dot ticker-dot-green"></span>4,200+ успішних наймів</div>
+        <div class="ticker-item"><span class="ticker-dot ticker-dot-gold"></span>98.7% uptime платформи</div>
+        <div class="ticker-item"><span class="ticker-dot ticker-dot-green"></span>2.1 сек — середній час аналізу</div>
+        <div class="ticker-item"><span class="ticker-dot ticker-dot-gold"></span>89% точність AI-метчингу</div>
+        <!-- Duplicate for seamless scroll -->
+        <div class="ticker-item"><span class="ticker-dot ticker-dot-green"></span>150+ активних HR-команд</div>
+        <div class="ticker-item"><span class="ticker-dot ticker-dot-gold"></span>12,000+ оброблених резюме</div>
+        <div class="ticker-item"><span class="ticker-dot ticker-dot-green"></span>4,200+ успішних наймів</div>
+        <div class="ticker-item"><span class="ticker-dot ticker-dot-gold"></span>98.7% uptime платформи</div>
+        <div class="ticker-item"><span class="ticker-dot ticker-dot-green"></span>2.1 сек — середній час аналізу</div>
+        <div class="ticker-item"><span class="ticker-dot ticker-dot-gold"></span>89% точність AI-метчингу</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="section-label" data-reveal>Тарифи</div>
+    <h2 class="section-title" data-reveal data-delay="100">Оберіть свій план <span class="highlight-gold">Vectyra</span></h2>
+    <p class="section-subtitle" data-reveal data-delay="200">Гнучкі тарифи для команд будь-якого розміру — від стартапів до корпорацій</p>
+    <div class="pricing-coming-soon-bar" data-reveal data-delay="200">
+      <span class="pulse-dot dot-pulse"></span>
+      <span>Детальне ціноутворення формується. Залиште заявку — ми зв'яжемось першими!</span>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card card-reveal" id="pricing-starter">
+        <div class="pricing-placeholder-badge">Скоро</div>
+        <div class="plan-header"><h3 class="plan-name">Starter</h3><p class="plan-desc">Ідеально для малого бізнесу та стартапів</p></div>
+        <div class="plan-price-placeholder"><div class="price-skeleton shimmer"></div><div class="price-skeleton short shimmer"></div></div>
+        <ul class="plan-features">
+          <li>✓ До 5 активних вакансій</li>
+          <li>✓ 100 AI-аналізів/міс</li>
+          <li>✓ Semantic Matching</li>
+          <li>✓ Email підтримка 24/5</li>
+          <li>✓ Базова аналітика</li>
+          <li class="disabled">✗ Auto-Screening Bot</li>
+          <li class="disabled">✗ Advanced Analytics</li>
+        </ul>
+        <a href="#contact" class="btn-plan-ghost" id="btn-starter">Отримати ціну</a>
+      </div>
+      <div class="pricing-card pricing-featured card-reveal" id="pricing-pro">
+        <div class="pricing-popular-badge">Найпопулярніший</div>
+        <div class="plan-header"><h3 class="plan-name">Professional</h3><p class="plan-desc">Для активних HR-відділів</p></div>
+        <div class="plan-price-placeholder featured-price"><div class="price-skeleton shimmer-gold"></div><div class="price-skeleton short shimmer-gold"></div></div>
+        <ul class="plan-features">
+          <li>✓ До 25 активних вакансій</li>
+          <li>✓ 500 AI-аналізів/міс</li>
+          <li>✓ Semantic Matching</li>
+          <li>✓ AI Summarization (GPT-4o)</li>
+          <li>✓ Auto-Screening Bot</li>
+          <li>✓ Analytics Dashboard</li>
+          <li>✓ Пріоритетна підтримка 24/7</li>
+        </ul>
+        <a href="#contact" class="btn-plan-primary btn-shine" id="btn-pro">Отримати ціну</a>
+      </div>
+      <div class="pricing-card card-reveal" id="pricing-enterprise">
+        <div class="pricing-placeholder-badge">Скоро</div>
+        <div class="plan-header"><h3 class="plan-name">Enterprise</h3><p class="plan-desc">Для великих корпорацій з 200+ наймів</p></div>
+        <div class="plan-price-placeholder"><div class="price-skeleton shimmer"></div><div class="price-skeleton short shimmer"></div></div>
+        <ul class="plan-features">
+          <li>✓ Необмежені вакансії</li>
+          <li>✓ Необмежені AI-аналізи</li>
+          <li>✓ Всі функції Professional</li>
+          <li>✓ Власна LLM модель (fine-tuned)</li>
+          <li>✓ SLA 99.9% uptime</li>
+          <li>✓ Dedicated менеджер</li>
+          <li>✓ On-premise розгортання</li>
+        </ul>
+        <a href="#contact" class="btn-plan-ghost" id="btn-enterprise">Зв'язатись з нами</a>
+      </div>
+    </div>
+    <!-- Guarantees -->
+    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-v-text-medium" data-reveal data-delay="300">
+      <span class="flex items-center gap-2"><span class="text-lg">🔒</span> GDPR compliant</span>
+      <span class="flex items-center gap-2"><span class="text-lg">🛡️</span> SOC 2 Type II</span>
+      <span class="flex items-center gap-2"><span class="text-lg">💯</span> 30 днів money-back</span>
+      <span class="flex items-center gap-2"><span class="text-lg">🔑</span> SSO підтримка</span>
+    </div>
+    <!-- FAQ -->
+    <div class="mt-12 max-w-2xl mx-auto" data-reveal data-delay="400">
+      <h3 class="text-lg font-bold mb-6 text-center">Часті питання</h3>
+      <div class="flex flex-col gap-4">
+        <div class="bg-white rounded-xl p-5 border border-v-border">
+          <div class="font-semibold text-sm mb-1">Чи є безкоштовний пробний період?</div>
+          <div class="text-xs text-v-text-medium">Так, ви отримуєте 30 днів повного доступу до Professional плану без прив'язки кредитної картки.</div>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-v-border">
+          <div class="font-semibold text-sm mb-1">Які AI-моделі підтримуються?</div>
+          <div class="text-xs text-v-text-medium">OpenAI GPT-4o, Google Gemini Pro, а також HuggingFace моделі для on-premise розгортання.</div>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-v-border">
+          <div class="font-semibold text-sm mb-1">Чи можна змінити план?</div>
+          <div class="text-xs text-v-text-medium">Так, ви можете змінити план в будь-який момент. Різниця у вартості буде перерахована автоматично.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-wrapper">
+      <div class="contact-info" data-reveal>
+        <div class="section-label">Контакт</div>
+        <h2 class="section-title">Отримайте <span class="highlight-green">ранній доступ</span></h2>
+        <p>Залиште свої дані — ми зв'яжемось протягом 24 годин і обговоримо, як Vectyra може підсилити ваш HR-відділ.</p>
+        <ul class="contact-benefits">
+          <li><span class="benefit-icon">🎁</span> 30 днів безкоштовного тріалу</li>
+          <li><span class="benefit-icon">🚀</span> Персональний онбординг з експертом</li>
+          <li><span class="benefit-icon">🔒</span> Без прив'язки кредитної картки</li>
+          <li><span class="benefit-icon">📊</span> Безкоштовний аудит HR-процесів</li>
+          <li><span class="benefit-icon">⚡</span> Інтеграція за 15 хвилин</li>
+          <li><span class="benefit-icon">🌍</span> GDPR-сумісна платформа</li>
+        </ul>
+        <!-- Social proof -->
+        <div class="mt-6 p-4 rounded-xl bg-white border border-v-border">
+          <div class="text-sm italic text-v-text-medium">"Vectyra скоротила наш час на підбір з 14 до 3 днів. Це як мати AI-рекрутера в команді 24/7."</div>
+          <div class="mt-2 text-xs font-semibold text-v-text-light">— Марія К., HR Director, TechCorp</div>
+        </div>
+      </div>
+      <div class="contact-form" id="contact-form-wrap">
+        <div class="form-title">Залишити заявку</div>
+        <form id="lead-form" novalidate>
+          <div class="form-row">
+            <div class="form-group"><label for="f-name">Ім'я *</label><input type="text" id="f-name" placeholder="Олена" required></div>
+            <div class="form-group"><label for="f-last">Прізвище *</label><input type="text" id="f-last" placeholder="Коваль" required></div>
+          </div>
+          <div class="form-group"><label for="f-email">Email *</label><input type="email" id="f-email" placeholder="olena@company.com" required></div>
+          <div class="form-group"><label for="f-company">Компанія *</label><input type="text" id="f-company" placeholder="Назва компанії" required></div>
+          <div class="form-group">
+            <label for="f-size">Розмір команди</label>
+            <select id="f-size">
+              <option value="">Оберіть розмір</option>
+              <option value="1-10">1–10 людей</option>
+              <option value="11-50">11–50 людей</option>
+              <option value="51-200">51–200 людей</option>
+              <option value="201+">201+ людей</option>
+            </select>
+          </div>
+          <div class="form-group"><label for="f-msg">Що вас цікавить?</label><textarea id="f-msg" placeholder="Розкажіть про ваші HR-задачі..."></textarea></div>
+          <button type="submit" class="btn-form-submit" id="btn-form-submit">Отримати ранній доступ →</button>
+          <p class="form-note">Натискаючи кнопку, ви погоджуєтесь з нашою Політикою конфіденційності. Ми не спамимо.</p>
+        </form>
+        <div id="form-success" style="display:none;text-align:center;padding:40px 0;">
+          <div style="font-size:3rem;margin-bottom:12px;">✅</div>
+          <div style="font-weight:700;font-size:1.1rem;margin-bottom:8px;">Заявку отримано!</div>
+          <div style="color:#8A8A80;font-size:0.9rem;">Ми зв'яжемось з вами протягом 24 годин.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:12px;display:inline-flex;"><span class="logo-icon">⬡</span><span class="logo-text">Vectyra</span></a>
+        <p class="footer-desc">AI-платформа семантичного найму. Знаходьте ідеальних кандидатів швидше, розумніше, дешевше.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Продукт</h4>
+        <a href="#features">Можливості</a>
+        <a href="#how-it-works">Як це працює</a>
+        <a href="#pricing">Ціни</a>
+        <a href="dashboard.html">Кабінет</a>
+      </div>
+      <div class="footer-col">
+        <h4>Компанія</h4>
+        <a href="#">Про нас</a>
+        <a href="#">Блог</a>
+        <a href="#">Кар'єра</a>
+        <a href="#contact">Контакти</a>
+      </div>
+      <div class="footer-col">
+        <h4>Правова</h4>
+        <a href="#">Умови використання</a>
+        <a href="#">Конфіденційність</a>
+        <a href="#">GDPR</a>
+        <a href="#">Cookie</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Vectyra. Всі права захищені.</span>
+      <div style="display:flex;gap:16px;">
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+        <a href="#">GitHub</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
